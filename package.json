@@ -1,5 +1,5 @@
 {
-  "name": "abracadabra",
+  "name": "franklinTable",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod --extract-css --base-href /abracadabra/ && gh-pages -d dist"
+    "deploy": "ng build --prod --extract-css --base-href /franklinTable/ && gh-pages -d dist"
   },
   "private": true,
   "dependencies": {
