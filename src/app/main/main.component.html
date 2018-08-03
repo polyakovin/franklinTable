@@ -1,0 +1,62 @@
+<div class="container">
+  <h1 class="text-center mt-5">Ежедневная рутина</h1>
+  <!-- <p>
+    Каждый вечер нужно честно заполнять табличку.
+  </p> -->
+
+  <div *ngIf="!loading">
+    <div *ngIf="today !== undefined">
+      <h2>Задачи на сегодня</h2>
+      <div class="task" *ngFor="let p of pom; let i = index">
+        <div *ngIf="data[today][p.id] !== p.do"
+          (click)="tickChanged(today, p.id)">
+          <strong *ngIf="p.time !== undefined">{{ p.time }}</strong>
+          {{ p.name }}
+        </div>
+      </div>
+    </div>
+
+    <h2>Таблица Франклина</h2>
+    <table class="table table-hover mt-3">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="date" *ngFor="let date of dates; let j = index">
+            <div [ngClass]="{today: j === dates.length - 1}">
+              {{ date | slice:-2 }}
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of pom; let i = index"
+            [ngClass]="{
+              'table-success': p.completed > 20
+            }">
+          <td>
+            {{ p.name }}
+            <strong *ngIf="p.time !== undefined">(<u>{{ p.time }}</u>)</strong>
+          </td>
+          <td *ngFor="let date of dates; let j = index"
+            (click)="tickChanged(date, p.id)"
+            class="clickable"
+            [ngClass]="{
+              'text-success': data[date][p.id] === p.do,
+              'text-danger': data[date][p.id] !== p.do,
+              last: j === dates.length - 1
+            }">
+            {{ data[date][p.id] ? "&#x2713;" : "&#x2715;" }}
+            <div class="shield"></div>
+          </td>
+          <td>
+            {{ p.completed + " / 21" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="loading">
+    Загрузка...
+  </div>
+</div>

@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently --kill-others 'npm run watch:frontend' 'npm run watch:backend'",
+    "watch:frontend": "ng build -w",
+    "watch:backend": "nodemon app.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -35,6 +37,10 @@
     "popper.js": "^1.14.3",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
+    "body-parser": "^1.17.2",
+    "concurrently": "^3.4.0",
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0",
     "yarn": "^1.7.0",
     "zone.js": "^0.8.26"
   },
